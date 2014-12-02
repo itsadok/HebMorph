@@ -65,7 +65,7 @@ public class BasicHebrewTest extends TestBase {
 
 	@Before
 	public void setUp() throws Exception {
-		analyzer = new MorphAnalyzer(Version.LUCENE_46, getDictionary(), LingInfo.buildPrefixTree(false));
+		analyzer = new MorphAnalyzer(Version.LUCENE_45, getDictionary(), LingInfo.buildPrefixTree(false));
 	}
 
 	@After
@@ -180,7 +180,7 @@ public class BasicHebrewTest extends TestBase {
 	{
 		final Directory d = new RAMDirectory();
 
-        IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_46, analyzer);
+        IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_45, analyzer);
         config.setOpenMode(IndexWriterConfig.OpenMode.CREATE);
 		IndexWriter writer = new IndexWriter(d, config);
 		Document doc = new Document();
@@ -189,7 +189,7 @@ public class BasicHebrewTest extends TestBase {
 		writer.close();
 
 		IndexSearcher searcher = new IndexSearcher(DirectoryReader.open(d));
-		QueryParser qp = new QueryParser(Version.LUCENE_46, "content", analyzer);
+		QueryParser qp = new QueryParser(Version.LUCENE_45, "content", analyzer);
 		Query query = qp.parse(whatToSearch);
 		ScoreDoc[] hits = searcher.search(query, null, 1000).scoreDocs;
 
